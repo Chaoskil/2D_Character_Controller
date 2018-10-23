@@ -8,6 +8,9 @@ public class RobotControllerScript : MonoBehaviour {
     private float maxSpeed = 10f;
 
     [SerializeField]
+    private float jumpForce = 5f;
+
+    [SerializeField]
     private Rigidbody2D rb2d;
 
     [SerializeField]
@@ -63,9 +66,15 @@ public class RobotControllerScript : MonoBehaviour {
     {
         grounded = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
         anim.SetBool("Ground", grounded);
+        anim.SetFloat("vSpeed", rb2d.velocity.y);
     }
     private void Jump()
     {
-
+        if(grounded && Input.GetButtonDown("Jump"))
+        {
+            anim.SetBool("Ground", false);
+            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        }
+        
     }
 }
