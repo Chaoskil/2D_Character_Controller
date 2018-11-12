@@ -22,16 +22,21 @@ public class RobotControllerScript : MonoBehaviour {
     [SerializeField]
     private LayerMask whatIsGround;
 
+    [SerializeField]
+    private PhysicsMaterial2D playerMovingPhysicsMaterial, playerStoppingPhysicsMaterial;
 
+    [SerializeField]
+    private Collider2D playerGroundCollider;
+
+
+    private float move;
     private bool facingRight = true;
     private bool grounded = false;
     private float groundRadius = 0.2f;
 
-    void Start () {
-
-	}
     private void FixedUpdate()
     {
+        UpdatePhysicsMaterial();
         Move();
     }
     private void Update()
@@ -42,7 +47,7 @@ public class RobotControllerScript : MonoBehaviour {
 
     private void Move()
     {
-        float move = Input.GetAxis("Horizontal");
+        move = Input.GetAxisRaw("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(move));
 
         rb2d.velocity = new Vector2(move * maxSpeed, rb2d.velocity.y);
@@ -76,5 +81,16 @@ public class RobotControllerScript : MonoBehaviour {
             rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
         
+    }
+    private void UpdatePhysicsMaterial()
+    {
+        if(Mathf.Abs(move) > 0)
+        {
+            playerGroundCollider.sharedMaterial = playerMovingPhysicsMaterial;
+        }
+        else
+        {
+            playerGroundCollider.sharedMaterial = playerStoppingPhysicsMaterial;
+        }
     }
 }
