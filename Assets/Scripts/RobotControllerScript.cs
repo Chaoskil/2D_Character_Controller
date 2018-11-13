@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RobotControllerScript : MonoBehaviour {
 
@@ -33,6 +34,8 @@ public class RobotControllerScript : MonoBehaviour {
     private bool facingRight = true;
     private bool grounded = false;
     private float groundRadius = 0.2f;
+    private Checkpoint currentCheckpoint;
+
 
     private void FixedUpdate()
     {
@@ -91,6 +94,27 @@ public class RobotControllerScript : MonoBehaviour {
         else
         {
             playerGroundCollider.sharedMaterial = playerStoppingPhysicsMaterial;
+        }
+    }
+    public void SetCurrentCheckpoint(Checkpoint newCurrentCheckpoint)
+    {
+        if (currentCheckpoint != null)
+        {
+            currentCheckpoint.SetIsActivated(false);
+        }
+        currentCheckpoint = newCurrentCheckpoint;
+        currentCheckpoint.SetIsActivated(true);
+    }
+    public void Respawn()
+    {
+        if (currentCheckpoint == null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            rb2d.velocity = Vector2.zero;
+            transform.position = currentCheckpoint.transform.position;
         }
     }
 }
