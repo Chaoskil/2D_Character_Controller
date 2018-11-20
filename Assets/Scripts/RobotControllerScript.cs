@@ -38,9 +38,15 @@ public class RobotControllerScript : MonoBehaviour {
     private Checkpoint currentCheckpoint;
     private int beforeRespawn = 5000;
     private int timer = 0;
+    private AudioSource audioSource;
 
 
-    private void FixedUpdate()
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+        private void FixedUpdate()
     {
         UpdatePhysicsMaterial();
         Move();
@@ -133,6 +139,7 @@ public class RobotControllerScript : MonoBehaviour {
     }
     public void Death()
     {
+        audioSource.Play();
         anim.SetBool("Death", true);
         rb2d.gravityScale = 0;
         rb2d.velocity = Vector2.zero;
