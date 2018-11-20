@@ -33,8 +33,11 @@ public class RobotControllerScript : MonoBehaviour {
     private float move;
     private bool facingRight = true;
     private bool grounded = false;
+    private bool died = false;
     private float groundRadius = 0.2f;
     private Checkpoint currentCheckpoint;
+    private int beforeRespawn = 5000;
+    private int timer = 0;
 
 
     private void FixedUpdate()
@@ -50,17 +53,20 @@ public class RobotControllerScript : MonoBehaviour {
 
     private void Move()
     {
-        move = Input.GetAxisRaw("Horizontal");
-        anim.SetFloat("Speed", Mathf.Abs(move));
+        if(anim.GetBool("Death") == false)
+        {
+            move = Input.GetAxisRaw("Horizontal");
+            anim.SetFloat("Speed", Mathf.Abs(move));
 
-        rb2d.velocity = new Vector2(move * maxSpeed, rb2d.velocity.y);
-        if (move > 0 && !facingRight)
-        {
-            Flip();
-        }
-        else if (move < 0 && facingRight)
-        {
-            Flip();
+            rb2d.velocity = new Vector2(move * maxSpeed, rb2d.velocity.y);
+            if (move > 0 && !facingRight)
+            {
+                Flip();
+            }
+            else if (move < 0 && facingRight)
+            {
+                Flip();
+            }
         }
     }
     private void Flip()
@@ -78,10 +84,13 @@ public class RobotControllerScript : MonoBehaviour {
     }
     private void Jump()
     {
-        if(grounded && Input.GetButtonDown("Jump"))
+        if (anim.GetBool("Death") == false)
         {
-            anim.SetBool("Ground", false);
-            rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            if (grounded && Input.GetButtonDown("Jump"))
+            {
+                anim.SetBool("Ground", false);
+                rb2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
         }
         
     }
@@ -105,16 +114,28 @@ public class RobotControllerScript : MonoBehaviour {
         currentCheckpoint = newCurrentCheckpoint;
         currentCheckpoint.SetIsActivated(true);
     }
-    public void Respawn()
+    private void Respawn()
     {
         if (currentCheckpoint == null)
         {
+            anim.SetBool("Death", false);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            rb2d.gravityScale = 7;
+
         }
         else
         {
             rb2d.velocity = Vector2.zero;
+            anim.SetBool("Death", false);
             transform.position = currentCheckpoint.transform.position;
+            rb2d.gravityScale = 7;
         }
+    }
+    public void Death()
+    {
+        anim.SetBool("Death", true);
+        rb2d.gravityScale = 0;
+        rb2d.velocity = Vector2.zero;
+        Invoke("Respawn", 1);
     }
 }

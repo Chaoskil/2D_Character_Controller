@@ -10,7 +10,7 @@ public class Hazards : MonoBehaviour {
         if (collision.gameObject.CompareTag("Player"))
         {
             RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
-            player.Respawn();
+            player.Death();
         }
     }
 }
