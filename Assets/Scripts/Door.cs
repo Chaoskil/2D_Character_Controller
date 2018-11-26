@@ -10,11 +10,17 @@ public class Door : MonoBehaviour {
 
     private bool isPlayerInTrigger;
 
+    private bool openDoor = false;
+    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             isPlayerInTrigger = true;
+            RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
+            openDoor = player.GiveDoorKey();
+            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -27,7 +33,7 @@ public class Door : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetButtonDown("Activate") && isPlayerInTrigger)
+        if (Input.GetButtonDown("Activate") && isPlayerInTrigger && openDoor)
         {
             SceneManager.LoadScene(sceneToLoad);
         }

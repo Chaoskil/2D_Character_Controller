@@ -39,6 +39,7 @@ public class RobotControllerScript : MonoBehaviour {
     private int beforeRespawn = 5000;
     private int timer = 0;
     private AudioSource audioSource;
+    private bool pickUpKey = false;
 
 
     private void Start()
@@ -144,5 +145,14 @@ public class RobotControllerScript : MonoBehaviour {
         rb2d.gravityScale = 0;
         rb2d.velocity = Vector2.zero;
         Invoke("Respawn", 1);
+    }
+    public void DoesPlayerHaveKey(bool answer)
+    {
+        anim.SetBool("hasKey", answer);
+        pickUpKey = answer;
+    }
+    public bool GiveDoorKey()
+    {
+        return pickUpKey;
     }
 }
