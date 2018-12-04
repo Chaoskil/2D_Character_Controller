@@ -4,41 +4,32 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour {
 
-    [SerializeField]
-    private float inactiveRotationSpeed = 100, activatedRotationSpeed = 300;
 
+    //variable that needs to be applied within unity
     [SerializeField]
     private float inactivatedScale = 1, activatedScale = 1.5f;
 
-    [SerializeField]
-    private Color inactivatedColor, activatedColor;
 
+    //other variables that dont need to be applied in Unity
     private bool isActivated = false;
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
 
+
+    //works as soon as the game starts, gives the code access to change srite renderer and audio source
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
     }
+
+    //updates the checkpoints scale regulary
     private void Update()
     {
-        UpdateRotation();
         UpdateScale();
     }
 
-    private void UpdateColor()
-    {
-        Color color = inactivatedColor;
-
-        if (isActivated)
-        {
-            color = activatedColor;
-        }
-
-        spriteRenderer.color = color;
-    }
+    //changes the scale of the checkpoint depending on if it is the active checkpoint or not
     private void UpdateScale()
     {
         float scale = inactivatedScale;
@@ -50,17 +41,8 @@ public class Checkpoint : MonoBehaviour {
 
         transform.localScale = Vector3.one * scale;
     }
-    private void UpdateRotation()
-    {
-        float rotationSpeed = inactiveRotationSpeed;
 
-        if (isActivated)
-        {
-            rotationSpeed = activatedRotationSpeed;
-        }
-
-        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-    }
+    //checks if the player touches the checkpoint then makes it the current checkpoint they will respawn at
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !isActivated)
@@ -71,10 +53,10 @@ public class Checkpoint : MonoBehaviour {
         }
     }
 
+    //Changes the scale of the checkpoint to indicate that it is the active one
     public void SetIsActivated(bool value)
     {
         isActivated = value;
         UpdateScale();
-        UpdateColor();
     }
 }

@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Keys : MonoBehaviour {
 
-    private AudioSource audioSource;
-    private SpriteRenderer spriteRenderer;
-    private BoxCollider2D boxCollider2D;
-
+    //variables that need to be set within Unity
     [SerializeField]
     private float inactiveRotationSpeed = 100;
 
@@ -17,60 +14,35 @@ public class Keys : MonoBehaviour {
     [SerializeField]
     private Color inactivatedColor;
 
+    //variables that dont need to be set in Unity
+    private AudioSource audioSource;
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider2D;
+    
 
-    // Use this for initialization
+    //works as soon as the game starts, allows the code to have access to the audio soucre, sprite renderer, and the box collider
     private void Start () {
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
     }
 
-    // Update is called once per frame
+    //Once the player touches the key then they collect it similar to the collectibles
     private void OnTriggerEnter2D(Collider2D collision)
-        { 
+    { 
         if (collision.gameObject.CompareTag("Player"))
         {
+            //gets access to the players script and tells it that the player has the key
             RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
             player.DoesPlayerHaveKey(true);
+
+            //turns off the keys hitbox and sends a message saying that the player has the key, plays the key sound as well
             boxCollider2D.enabled = false;
             Debug.Log("You have the key!");
             audioSource.Play();
-            Destroy(gameObject, audioSource.clip.length);
 
+            //destroys the key object in the level
+            Destroy(gameObject, audioSource.clip.length);
         }
     }
-
-  /*  private void Death()
-    {
-        spriteRenderer.enabled = false;
-        Destroy(gameObject);
-    }
-
-*/
-
-    private void Update()
-    {
-        UpdateRotation();
-        UpdateScale();
-    }
-
-    private void UpdateColor()
-    {
-        Color color = inactivatedColor;
-
-        spriteRenderer.color = color;
-    }
-    private void UpdateScale()
-    {
-        float scale = inactivatedScale;
-
-        transform.localScale = Vector3.one * scale;
-    }
-    private void UpdateRotation()
-    {
-        float rotationSpeed = inactiveRotationSpeed;
-
-        transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-    }
-
 }
