@@ -33,18 +33,20 @@ public class Keys : MonoBehaviour {
             RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
             player.DoesPlayerHaveKey(true);
             boxCollider2D.enabled = false;
+            Debug.Log("You have the key!");
             audioSource.Play();
-            Death();
+            Destroy(gameObject, audioSource.clip.length);
+
         }
     }
 
-    private void Death()
+  /*  private void Death()
     {
         spriteRenderer.enabled = false;
         Destroy(gameObject);
     }
 
-
+*/
 
     private void Update()
     {

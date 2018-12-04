@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 61131303737102142}
   - component: {fileID: 82942579133485950}
   - component: {fileID: 114130435793556982}
+  - component: {fileID: 95441441337672558}
   m_Layer: 0
   m_Name: Chestable
   m_TagString: Untagged
@@ -163,6 +164,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &95441441337672558
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1940537077668596}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19265a5a74e5abd40844020e67a49231, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114130435793556982
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -174,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 631b66ed762e23d488d348efb6f50bdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 95441441337672558}
 --- !u!212 &212069650705508836
 SpriteRenderer:
   m_ObjectHideFlags: 1

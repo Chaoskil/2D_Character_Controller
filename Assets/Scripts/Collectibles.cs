@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Collectibles : MonoBehaviour {
 
+
+    [SerializeField]
+    private Animator anim;
+
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
@@ -24,7 +28,7 @@ public class Collectibles : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            spriteRenderer.enabled = false;
+            anim.SetBool("Collected", true);
             boxCollider2D.enabled = false;
             coinCount++;
             Debug.Log("Coin count: " + coinCount);
