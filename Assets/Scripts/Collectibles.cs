@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Collectibles : MonoBehaviour {
-
-    //variable that needs to be set inside of Unity
-    [SerializeField]
-    private Animator anim;
-
+    
     //variables that dont need to be set in unity
     private AudioSource audioSource;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
+    private Animator anim;
 
     //a coin count for how many chests the player has collected throughout the game
     private static int coinCount;
@@ -24,6 +21,7 @@ public class Collectibles : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
     }
 
     //once the player touchers the collectible then the collectible is destroyed and the player score is increased
@@ -35,7 +33,6 @@ public class Collectibles : MonoBehaviour {
             anim.SetBool("Collected", true);
             boxCollider2D.enabled = false;
             coinCount++;
-            Debug.Log("Coin count: " + coinCount);
             audioSource.Play();
 
             //destorys the game object after everything is done

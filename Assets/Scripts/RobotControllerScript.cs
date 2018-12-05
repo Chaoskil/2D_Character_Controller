@@ -7,13 +7,7 @@ public class RobotControllerScript : MonoBehaviour {
 
     //variables that need to be set within Unity
     [SerializeField]
-    private float maxSpeed = 10f; private float jumpForce = 5f; private float gravityForce = 7f;
-
-    [SerializeField]
-    private Rigidbody2D rb2d;
-
-    [SerializeField]
-    private Animator anim;
+    private float maxSpeed, jumpForce, gravityForce;
 
     [SerializeField]
     private Transform groundCheck;
@@ -24,33 +18,41 @@ public class RobotControllerScript : MonoBehaviour {
     [SerializeField]
     private PhysicsMaterial2D playerMovingPhysicsMaterial, playerStoppingPhysicsMaterial;
 
-    [SerializeField]
     private Collider2D playerGroundCollider;
 
     //variables that dont need to be set within Unity
     private float move;
-    private bool facingRight = true;
-    private bool grounded = false;
-    private bool died = false;
-    private float groundRadius = 0.2f;
+    private bool facingRight;
+    private bool grounded;
+    private bool died;
+    private float groundRadius;
     private Checkpoint currentCheckpoint;
-    private int beforeRespawn = 5000;
-    private int timer = 0;
+    private int beforeRespawn;
+    private int timer;
     private AudioSource audioSource;
-    private bool pickUpKey = false;
+    private bool pickUpKey;
+    private Rigidbody2D rb2d;
+    private Animator anim;
 
     //starts as soon as the game lauches, gives the code access to the audio source on the player
     private void Start()
     {
+        facingRight = true;
+        grounded = false;
+        died = false;
+        groundRadius = 0.2f;
+        beforeRespawn = 5000;
+        timer = 0;
+        pickUpKey = false;
+
         audioSource = GetComponent<AudioSource>();
+        playerGroundCollider = GetComponent<BoxCollider2D>();
+        anim = GetComponent<Animator>();
+        rb2d = GetComponent<Rigidbody2D>();
+
     }
 
     //updates the players physics material between stop and moving and also updates the player actually moving
-    private void FixedUpdate()
-    {
-        UpdatePhysicsMaterial();
-        Move();
-    }
 
     //updates to check whether the player is on the ground on their jumping
     private void Update()

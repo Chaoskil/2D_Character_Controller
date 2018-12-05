@@ -33,12 +33,10 @@ public class Keys : MonoBehaviour {
         if (collision.gameObject.CompareTag("Player"))
         {
             //gets access to the players script and tells it that the player has the key
-            RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
-            player.DoesPlayerHaveKey(true);
+            collision.GetComponent<RobotControllerScript>().DoesPlayerHaveKey(true);
 
             //turns off the keys hitbox and sends a message saying that the player has the key, plays the key sound as well
             boxCollider2D.enabled = false;
-            Debug.Log("You have the key!");
             audioSource.Play();
 
             //destroys the key object in the level

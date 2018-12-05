@@ -949,6 +949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   jumpForce: 25
+  gravityForce: 7
   rb2d: {fileID: 1011894149}
   anim: {fileID: 1011894152}
   groundCheck: {fileID: 1715398726}

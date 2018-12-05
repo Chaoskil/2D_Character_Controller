@@ -9,19 +9,20 @@ public class Door : MonoBehaviour {
     [SerializeField]
     private string sceneToLoad;
 
-    [SerializeField]
-    private Animator anim;
-
     //variables that do not need to be set within Unity
     private bool isPlayerInTrigger;
-    private bool openDoor = false;
+    private bool openDoor;
     private SpriteRenderer spriteRenderer;
+    private Animator anim;
 
     //starts as soon as the game launches, gives the code access to the sprite renderer and turns it off immediatetly
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
+
         spriteRenderer.enabled = false;
+        openDoor = false;
     }
 
     //if the player walks into the trigger for the door

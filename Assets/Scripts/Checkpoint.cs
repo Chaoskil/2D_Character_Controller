@@ -7,11 +7,11 @@ public class Checkpoint : MonoBehaviour {
 
     //variable that needs to be applied within unity
     [SerializeField]
-    private float inactivatedScale = 1, activatedScale = 1.5f;
+    private float inactivatedScale, activatedScale;
 
 
     //other variables that dont need to be applied in Unity
-    private bool isActivated = false;
+    private bool isActivated;
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
 
@@ -21,6 +21,7 @@ public class Checkpoint : MonoBehaviour {
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
+        isActivated = false;
     }
 
     //updates the checkpoints scale regulary
@@ -47,8 +48,7 @@ public class Checkpoint : MonoBehaviour {
     {
         if (collision.CompareTag("Player") && !isActivated)
         {
-            RobotControllerScript player = collision.GetComponent<RobotControllerScript>();
-            player.SetCurrentCheckpoint(this);
+            collision.GetComponent<RobotControllerScript>().SetCurrentCheckpoint(this);
             audioSource.Play();
         }
     }
