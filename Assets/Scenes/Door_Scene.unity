@@ -553,6 +553,48 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!1001 &1274058935
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4058450157980200, guid: 910603d72af791649ac8580452183a3b, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 13.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058450157980200, guid: 910603d72af791649ac8580452183a3b, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058450157980200, guid: 910603d72af791649ac8580452183a3b, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.057617188
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058450157980200, guid: 910603d72af791649ac8580452183a3b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058450157980200, guid: 910603d72af791649ac8580452183a3b, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058450157980200, guid: 910603d72af791649ac8580452183a3b, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058450157980200, guid: 910603d72af791649ac8580452183a3b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4058450157980200, guid: 910603d72af791649ac8580452183a3b, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 910603d72af791649ac8580452183a3b, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1577261789
 GameObject:
   m_ObjectHideFlags: 0
@@ -4727,8 +4769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 12.5
   jumpForce: 25
-  rb2d: {fileID: 2015800824}
-  anim: {fileID: 2015800821}
+  gravityForce: 0
   groundCheck: {fileID: 251610219}
   whatIsGround:
     serializedVersion: 2
@@ -4737,7 +4778,6 @@ MonoBehaviour:
     type: 2}
   playerStoppingPhysicsMaterial: {fileID: 6200000, guid: 47d34cc0639726b4a8e18a2160f03315,
     type: 2}
-  playerGroundCollider: {fileID: 2015800822}
 --- !u!95 &2015800821
 Animator:
   serializedVersion: 3

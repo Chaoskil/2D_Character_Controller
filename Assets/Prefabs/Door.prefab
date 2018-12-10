@@ -97,8 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91be9a1029bd4794bbb2312ecd51fa5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Door_Scene
-  anim: {fileID: 95773026154822576}
+  sceneToLoad: Character_Controller
 --- !u!212 &212753281324607802
 SpriteRenderer:
   m_ObjectHideFlags: 1

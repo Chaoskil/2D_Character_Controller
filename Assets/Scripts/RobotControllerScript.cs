@@ -53,6 +53,11 @@ public class RobotControllerScript : MonoBehaviour {
     }
 
     //updates the players physics material between stop and moving and also updates the player actually moving
+    private void FixedUpdate()
+    {
+        UpdatePhysicsMaterial();
+        Move();
+    }
 
     //updates to check whether the player is on the ground on their jumping
     private void Update()
