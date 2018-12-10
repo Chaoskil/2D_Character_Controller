@@ -40,7 +40,7 @@ public class RobotControllerScript : MonoBehaviour {
         facingRight = true;
         grounded = false;
         died = false;
-        groundRadius = 0.2f;
+        groundRadius = 0.6f;
         beforeRespawn = 5000;
         timer = 0;
         pickUpKey = false;
